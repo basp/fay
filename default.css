@@ -1,0 +1,25 @@
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	background-color: black;
+	color: deeppink;
+}
+
+.chibi-console {
+	font-family: Hack, Consolas, Monaco, monospace;
+	background-color: deeppink;
+	color: black;
+	padding: 8px;
+}
+
+.chibi-prompt {
+	float: left;
+}
+
+.chibi-command {
+	outline: none;
+	margin-left: 16px;	
+}

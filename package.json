@@ -1,0 +1,17 @@
+{
+  "name": "fay",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basp/fay.git"
+  },
+  "author": "Bas Pennings",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/basp/fay/issues"
+  },
+  "homepage": "https://github.com/basp/fay#readme",
+  "dependencies": {
+    "jquery": "^2.1.4"
+  }
+}

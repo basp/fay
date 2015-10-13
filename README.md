@@ -1,2 +1,2 @@
-# fay
-It's something.
+# chibi-prompt
+More general version of Chibi.
