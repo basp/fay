@@ -8,18 +8,25 @@ body {
 	color: deeppink;
 }
 
-.chibi-console {
+.console {
 	font-family: Hack, Consolas, Monaco, monospace;
 	background-color: deeppink;
 	color: black;
 	padding: 8px;
+	position: absolute;
+	bottom: 0px;
+	width: 70%;
 }
 
-.chibi-prompt {
+.prompt {
 	float: left;
 }
 
-.chibi-command {
+.command {
 	outline: none;
 	margin-left: 16px;	
+}
+
+.monitor {
+	font-family: Hack, Consolas, Monaco, monospace;	
 }
