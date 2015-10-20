@@ -20,5 +20,10 @@ class TestComponent {
 };
 
 $(() => {
-    chibi(cmd => { console.log(cmd) });
+    var $output = $('div.output');
+    
+    chibi(cmd => { 
+        var msg = $('<div/>').append(cmd);
+        $output.append(msg);
+    });
 });
