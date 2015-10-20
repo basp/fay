@@ -10,7 +10,10 @@ const enum Key {
     ENTER = 13
 }
 
-export default function chibi(handler: (cmd: string) => void, target: any = 'div.chibi textarea') {
+export default function chibi(
+	handler: (cmd: string) => void, 
+	target: any = 'div.chibi textarea') {
+	
 	var $input = $(target);
 	var el = $input.get(0); 
 	
