@@ -10,6 +10,9 @@
     },
     "node/node.d.ts": {
       "commit": "14ab703f435375194360cdba3abab61afc879c18"
+    },
+    "mithril/mithril.d.ts": {
+      "commit": "68548c2daab053869f323d475419c693478bbb73"
     }
   }
 }

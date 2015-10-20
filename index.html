@@ -1,17 +1,35 @@
 <!doctype html>
 <html>
 <head>
-	<link rel="stylesheet" href="default.css" />
-	<script src="bundle.js"></script>
+	<script src="node_modules\jquery\dist\jquery.js"></script>
+	<script src="node_modules\mithril\mithril.js"></script>
+	<script src="index.js"></script>
+	
+	<link rel="stylesheet" href="chibi/chibi.css" />
+	
+	<style>
+		* { padding: 0px; margin: 0px }
+		
+		div.chibi {
+			background-color: deeppink;
+			padding: 16px;
+			position: absolute;
+			bottom: 0px;
+		}
+		
+		textarea.chibi {
+			padding: 8px;
+			font-size: 18px;
+		}
+	</style>
 </head>
 <body>
-	<div class="console">
-		<div class="input">
-			<div class="prompt">&gt;&nbsp;</div>
-			<div class="command" contenteditable="true"></div>
-		</div>
+	<div class="chibi-output">
 	</div>
-	
-	<div class="monitor"></div>
+	<div class="chibi">
+		<textarea class="chibi" rows="1"></textarea>
+	</div>
+	<script>
+	</script>
 </body>
 </html>

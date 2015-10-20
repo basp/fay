@@ -1,0 +1,12 @@
+div.chibi {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+textarea.chibi {
+	font-family: Hack, Consolas, Monaco, monospace;
+	display: block;
+	resize: none;
+	box-sizing: border-box;
+	width: 100%;
+}

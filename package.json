@@ -12,6 +12,7 @@
   },
   "homepage": "https://github.com/basp/fay#readme",
   "dependencies": {
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "mithril": "^0.2.0"
   }
 }
