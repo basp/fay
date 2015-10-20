@@ -1,8 +1,7 @@
-# chibi-prompt
-More general version of Chibi.
+# Fay
+For now this is mostly me fighting the DOM to get a nice
+chat interface going that is reasonably compliant and supported
+and doesn't take too much fuss.
 
-### Weird stuff
-* Fixing the width of the `.command` prompt *fixed* the issue with commands
-overflowing their containing `Element`. Bascially the console got messed up
-when a command wrapped but now that that the width of the console is fixed in 
-CSS this no longer seems to be an issue.
+For now it's mostly a pretty opionionated experimental 
+auto-sizing `textarea`. 
