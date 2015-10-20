@@ -12,13 +12,13 @@ const enum Key {
 
 export default function chibi(handler: (cmd: string) => void, target: any = 'div.chibi textarea') {
 	var $input = $(target);
-    var el = $input.get(0); 
+	var el = $input.get(0); 
 	
 	function resize() {
-        var offset = el.offsetHeight - el.clientHeight;
-        $(el).
-            css('height', 'auto').
-            css('height', el.scrollHeight + offset);		
+		var offset = el.offsetHeight - el.clientHeight;
+		$(el).
+			css('height', 'auto').
+			css('height', el.scrollHeight + offset);		
 	}
 	
 	$input.on('keyup input', e => {
@@ -34,10 +34,10 @@ export default function chibi(handler: (cmd: string) => void, target: any = 'div
 			
 			cmd = $(target).val();
 			handler(cmd);
-            
+			
 			$(target).val('');
 			resize();		
-
+	
 			return false;
 		}
 	});
