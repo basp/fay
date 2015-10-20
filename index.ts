@@ -1,5 +1,8 @@
 /// <reference path="typings/tsd.d.ts" />
 
+import $ = require('jquery');
+import chibi from './chibi/chibi';
+
 class TestComponent {
     view(ctrl) {
         return m('h3', {config: this.config()}, ctrl.title);
