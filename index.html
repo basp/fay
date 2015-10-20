@@ -1,8 +1,9 @@
 <!doctype html>
 <html>
 <head>
-	<script src="node_modules\jquery\dist\jquery.js"></script>
-	<script src="node_modules\mithril\mithril.js"></script>
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+	<script src="node_modules/mithril/mithril.js"></script>
+	<script src="chibi/chibi.js"></script>
 	<script src="index.js"></script>
 	
 	<link rel="stylesheet" href="chibi/chibi.css" />
@@ -17,9 +18,11 @@
 			bottom: 0px;
 		}
 		
-		textarea.chibi {
+		div.chibi textarea {
 			padding: 8px;
 			font-size: 18px;
+			background-color: black;
+			color: white;
 		}
 	</style>
 </head>
@@ -27,9 +30,7 @@
 	<div class="chibi-output">
 	</div>
 	<div class="chibi">
-		<textarea class="chibi" rows="1"></textarea>
+		<textarea rows="1"></textarea>
 	</div>
-	<script>
-	</script>
 </body>
 </html>

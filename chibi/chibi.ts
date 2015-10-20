@@ -1,32 +1,40 @@
-// var $input = $('textarea.chibi');
-// 
-// function resizeInput(el) {
-// 	var offset = el.offsetHeight - el.clientHeight;
-// 	$(el).
-// 		css('height', 'auto').
-// 		css('height', el.scrollHeight + offset);
-// }
-// 
-// $input.on('keyup input', function () {
-// 	resizeInput(this);
-// });
-// 
-// $input.keydown(function (e) {
-// 	var cmd, $msg;
-// 	
-// 	switch (e.which) {
-// 	case Key.ENTER:
-// 		e.preventDefault();
-// 		
-// 		cmd = $(this).val();
-// 		
-// 		$(this).val('');
-// 		resizeInput(this);
-// 								
-// 		return false;
-// 	}
-// });
+interface Element {
+    offsetHeight: number;
+}
 
-function chibi(el: Element) {
+const enum Key {
+    ENTER = 13
+}
+
+function chibi(handler: (cmd: string) => void, target: any = 'div.chibi textarea') {
+	var $input = $(target);
+    var el = $input.get(0); 
 	
+	function resize() {
+        var offset = el.offsetHeight - el.clientHeight;
+        $(el).
+            css('height', 'auto').
+            css('height', el.scrollHeight + offset);		
+	}
+	
+	$input.on('keyup input', e => {
+		resize();
+	});
+	
+	$input.keydown(e => {
+		var cmd, $msg;
+		
+		switch (e.which) {
+		case Key.ENTER:
+			e.preventDefault();
+			
+			cmd = $(target).val();
+			handler(cmd);
+            
+			$(target).val('');
+			resize();		
+
+			return false;
+		}
+	});
 }						

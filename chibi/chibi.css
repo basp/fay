@@ -3,10 +3,12 @@ div.chibi {
 	width: 100%;
 }
 
-textarea.chibi {
+div.chibi textarea {
 	font-family: Hack, Consolas, Monaco, monospace;
 	display: block;
-	resize: none;
 	box-sizing: border-box;
 	width: 100%;
+	resize: none;
+	outline: none;
+	border: none;
 }
