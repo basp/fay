@@ -3,6 +3,7 @@
 import m = require('mithril');
 import $ = require('jquery');
 import autosize = require('autosize');
+
 import {EventEmitter} from 'events';
 
 const enum Key {
@@ -11,7 +12,7 @@ const enum Key {
 	DOWN = 40
 }
 
-class InputLine extends EventEmitter implements MithrilModule {
+class Input extends EventEmitter implements MithrilModule {
 	value = m.prop('fubar');
 	
 	controller = () => {};
@@ -33,11 +34,16 @@ class InputLine extends EventEmitter implements MithrilModule {
 	
 	config(ctrl) {
 		return (el: Element, initialized: boolean) => {
+			if (initialized) return;
 			autosize(el);
+			el.addEventListener('autosize:resized', () => {
+				var h = $(el).outerHeight();
+				this.emit('resized', h);
+			});
 		}
 	}
 	
-	onKeyDown(e: KeyboardEvent) {
+	private onKeyDown(e: KeyboardEvent) {
 		switch (e.which) {
 		case Key.ENTER:
 			e.preventDefault();
@@ -57,26 +63,40 @@ class InputLine extends EventEmitter implements MithrilModule {
 		}		
 	}
 
-	resize(el: Element) {
+	private resize(el: Element) {
 		var evt = document.createEvent('Event');
-		evt.initEvent('autosize:update', true, false);
+		evt.initEvent('autosize:update', true, true);
 		el.dispatchEvent(evt);
 	}
 }
 
+class Output implements MithrilModule {
+	controller = () => {};
+	
+	view(ctrl) {
+		return m('div');
+	}
+}
+
 class App implements MithrilModule {
-	input = new InputLine();
+	input: Input;
+	
+	constructor() {
+		this.input = new Input();
+		this.input.on('command', cmd => {
+			console.log(cmd);
+		});
+		this.input.on('resized', h => {
+			console.log(h);
+		});
+	}
 
 	controller = () => {};	
 	
 	view(ctrl) {
 		return m('div', [
-			m('div.output', [
-				this.input.value()
-			]),
-			m('div.input', [
-				this.input
-			])
+			m('div.output'),
+			m('div.input', [this.input])
 		]);
 	}
 }
