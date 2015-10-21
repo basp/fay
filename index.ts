@@ -116,6 +116,7 @@ class App implements MithrilModule {
 		m.startComputation();
 		$msg = $(`<div class="echo">${cmd}</div>`);
 		$('div.output').append($msg);
+		$msg.get(0).scrollIntoView(false);
 		m.endComputation();		
 	}
 
@@ -123,12 +124,10 @@ class App implements MithrilModule {
 		return (el: Element, initialized: boolean) => {
 			if (initialized) return;
 			var bottomOffset = $('div.input').outerHeight();
-
 			$(window).resize(() => {
 				bottomOffset = $('div.input').outerHeight(); 
 				this.resizeOutput(bottomOffset);
-			});	
-			
+			});			
 			this.resizeOutput(bottomOffset);
 		}
 	}	
