@@ -13,4 +13,6 @@ div.output {
 	padding: 8px;
 	box-sizing: border-box;
 	font-family: Hack, Consolas, Monaco, monospace;
+	overflow-x: auto;
+	overflow-y: scroll;
 }	

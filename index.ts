@@ -26,4 +26,14 @@ $(() => {
         var msg = $('<div/>').append(cmd);
         $output.append(msg);
     });
+
+    var hi = $('div.chibi').outerHeight(),
+        hw = $(window).innerHeight();
+
+    $output.outerHeight(hw - hi);        
+        
+    $(window).resize(() => {
+        hw = $(window).innerHeight();
+        $output.outerHeight(hw - hi);
+    });
 });
