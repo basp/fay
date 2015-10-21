@@ -3,8 +3,8 @@
 import m = require('mithril');
 import $ = require('jquery');
 import autosize = require('autosize');
-
 import {EventEmitter} from 'events';
+import * as parser from './parser';
 
 const enum Key {
 	ENTER = 13,
@@ -72,6 +72,8 @@ class Input extends EventEmitter implements MithrilModule {
 class App implements MithrilModule {
 	input: Input;
 	
+	echo = false;
+	
 	constructor() {
 		this.input = new Input();
 		this.input.on('command', this.onCommand.bind(this));	
@@ -103,10 +105,11 @@ class App implements MithrilModule {
 		$('div.output').outerHeight(totalHeight - bottomOffset);
 		m.endComputation();		
 	}	
-
+	
 	private onResized() {
+		var bottomOffset;
 		m.startComputation();
-		var bottomOffset = $('div.input').outerHeight();
+		bottomOffset = $('div.input').outerHeight();
 		this.resizeOutput(bottomOffset);
 		m.endComputation();		
 	}
@@ -114,9 +117,20 @@ class App implements MithrilModule {
 	private onCommand(cmd: string) {
 		var $msg;
 		m.startComputation();
-		$msg = $(`<div class="echo">${cmd}</div>`);
+		if (this.echo) {
+			$msg = $(`<div class="echo">${cmd}</div>`);
+			$('div.output').append($msg);			
+		}
+		
+		var b = new Buffer(cmd);
+		var r = parser.parse(b);
+		var json = JSON.stringify(r);
+		$msg = $(`<div class="msg"><pre>${json}</pre></div>`);
 		$('div.output').append($msg);
-		$msg.get(0).scrollIntoView(false);
+		
+		if ($msg) {
+			$msg.get(0).scrollIntoView(false);		
+		}
 		m.endComputation();		
 	}
 
