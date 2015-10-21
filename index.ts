@@ -72,7 +72,7 @@ class Input extends EventEmitter implements MithrilModule {
 class App implements MithrilModule {
 	input: Input;
 	
-	echo = false;
+	echo = true;
 	
 	constructor() {
 		this.input = new Input();
@@ -118,7 +118,7 @@ class App implements MithrilModule {
 		var $msg;
 		m.startComputation();
 		if (this.echo) {
-			$msg = $(`<div class="echo">${cmd}</div>`);
+			$msg = $(`<div class="echo"><pre>${cmd}</pre></div>`);
 			$('div.output').append($msg);			
 		}
 		
