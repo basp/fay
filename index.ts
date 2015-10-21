@@ -32,17 +32,6 @@ class Input extends EventEmitter implements MithrilModule {
 		});
 	}
 	
-	config(ctrl) {
-		return (el: Element, initialized: boolean) => {
-			if (initialized) return;
-			autosize(el);
-			el.addEventListener('autosize:resized', () => {
-				var h = $(el).outerHeight();
-				this.emit('resized', h);
-			});
-		}
-	}
-	
 	private onKeyDown(e: KeyboardEvent) {
 		switch (e.which) {
 		case Key.ENTER:
@@ -68,14 +57,16 @@ class Input extends EventEmitter implements MithrilModule {
 		evt.initEvent('autosize:update', true, true);
 		el.dispatchEvent(evt);
 	}
-}
 
-class Output implements MithrilModule {
-	controller = () => {};
-	
-	view(ctrl) {
-		return m('div');
-	}
+	private config(ctrl) {
+		return (el: Element, initialized: boolean) => {
+			if (initialized) return;
+			autosize(el);
+			el.addEventListener('autosize:resized', () => {
+				this.emit('resized');
+			});
+		}
+	}	
 }
 
 class App implements MithrilModule {
@@ -83,22 +74,53 @@ class App implements MithrilModule {
 	
 	constructor() {
 		this.input = new Input();
+
 		this.input.on('command', cmd => {
-			console.log(cmd);
+			m.startComputation();
+			$('div.output').append(`<div>${cmd}</div>`);
+			m.endComputation();
 		});
-		this.input.on('resized', h => {
-			console.log(h);
+		
+		this.input.on('resized', () => {
+			var bottomOffset = $('div.input').outerHeight();
+			this.resizeOutput(bottomOffset);
 		});
 	}
 
 	controller = () => {};	
 	
 	view(ctrl) {
-		return m('div', [
-			m('div.output'),
-			m('div.input', [this.input])
+		return m('div', {config: this.config(ctrl)}, [
+			m('div.output', {
+				style: {
+					'overflow-y': 'auto'
+				}
+			}),
+			m('div.input', {
+				style: {
+					position: 'absolute',
+					bottom: '0px'
+				}	
+			}, [this.input])
 		]);
 	}
+	
+	private resizeOutput(bottomOffset: number) {
+		var totalHeight = $(window).innerHeight();
+		m.startComputation();
+		$('div.output').height(totalHeight - bottomOffset);
+		m.endComputation();		
+	}	
+
+	private config(ctrl) {
+		return (el: Element, initialized: boolean) => {
+			if (initialized) return;
+			$(window).resize(() => {
+				var bottomOffset = $('div.input').outerHeight();
+				this.resizeOutput(bottomOffset);
+			});	
+		}
+	}	
 }
 
 $(() => {
