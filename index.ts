@@ -84,7 +84,7 @@ class App implements MithrilModule {
 		return m('div', {config: this.config(ctrl)}, [
 			m('div.output', {
 				style: {
-					'overflow-y': 'auto'
+					'overflow-y': 'scroll'
 				}
 			}),
 			m('div.input', {
@@ -97,15 +97,18 @@ class App implements MithrilModule {
 	}
 	
 	private resizeOutput(bottomOffset: number) {
-		var totalHeight = $(window).innerHeight();
+		var totalHeight;
 		m.startComputation();
+		totalHeight = $(window).innerHeight();
 		$('div.output').outerHeight(totalHeight - bottomOffset);
 		m.endComputation();		
 	}	
 
 	private onResized() {
+		m.startComputation();
 		var bottomOffset = $('div.input').outerHeight();
-		this.resizeOutput(bottomOffset);		
+		this.resizeOutput(bottomOffset);
+		m.endComputation();		
 	}
 
 	private onCommand(cmd: string) {
@@ -119,10 +122,14 @@ class App implements MithrilModule {
 	private config(ctrl) {
 		return (el: Element, initialized: boolean) => {
 			if (initialized) return;
+			var bottomOffset = $('div.input').outerHeight();
+
 			$(window).resize(() => {
-				var bottomOffset = $('div.input').outerHeight();
+				bottomOffset = $('div.input').outerHeight(); 
 				this.resizeOutput(bottomOffset);
 			});	
+			
+			this.resizeOutput(bottomOffset);
 		}
 	}	
 }
