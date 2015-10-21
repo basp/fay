@@ -74,17 +74,8 @@ class App implements MithrilModule {
 	
 	constructor() {
 		this.input = new Input();
-
-		this.input.on('command', cmd => {
-			m.startComputation();
-			$('div.output').append(`<div>${cmd}</div>`);
-			m.endComputation();
-		});
-		
-		this.input.on('resized', () => {
-			var bottomOffset = $('div.input').outerHeight();
-			this.resizeOutput(bottomOffset);
-		});
+		this.input.on('command', this.onCommand.bind(this));	
+		this.input.on('resized', this.onResized.bind(this));
 	}
 
 	controller = () => {};	
@@ -108,9 +99,22 @@ class App implements MithrilModule {
 	private resizeOutput(bottomOffset: number) {
 		var totalHeight = $(window).innerHeight();
 		m.startComputation();
-		$('div.output').height(totalHeight - bottomOffset);
+		$('div.output').outerHeight(totalHeight - bottomOffset);
 		m.endComputation();		
 	}	
+
+	private onResized() {
+		var bottomOffset = $('div.input').outerHeight();
+		this.resizeOutput(bottomOffset);		
+	}
+
+	private onCommand(cmd: string) {
+		var $msg;
+		m.startComputation();
+		$msg = $(`<div class="echo">${cmd}</div>`);
+		$('div.output').append($msg);
+		m.endComputation();		
+	}
 
 	private config(ctrl) {
 		return (el: Element, initialized: boolean) => {
