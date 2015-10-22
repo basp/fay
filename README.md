@@ -9,6 +9,6 @@ higher level programming language based roughly on ES and mooscript (start
 with `sandbox.ts`)
 
 How these ended up in this repository I can't really tell. Just a bad call of
-jdudgement I guess. Also, be warned that this is still in the early sandboxing
+judgement I guess. Also, be warned that this is still in the early sandboxing
 stage so use what you can't use but do clone/copy/whatever because this thing
 is heavily in flux.
