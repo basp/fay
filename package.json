@@ -12,6 +12,7 @@
   },
   "homepage": "https://github.com/basp/fay#readme",
   "dependencies": {
+    "acorn": "^2.4.0",
     "autosize": "^3.0.13",
     "jquery": "^2.1.4",
     "mithril": "^0.2.0"
