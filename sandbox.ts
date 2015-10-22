@@ -87,9 +87,9 @@ class IntermediateWalker implements Walker {
 }
 
 var code = `
-for (x in thing) {
-	quux = "bar";
-	foo = x;
+things = ['foo', 123, 'quux', $0];
+for (thing in things) {
+	otherThing = thing;
 }
 return 0;
 `;
